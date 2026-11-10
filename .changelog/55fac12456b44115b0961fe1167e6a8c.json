@@ -1,8 +1,0 @@
-{
-    "id": "55fac124-56b4-4115-b096-1fe1167e6a8c",
-    "type": "bugfix",
-    "description": "Sign the S3 Express CreateSession call with the same credentials used to build the session cache key, and give each derived client its own bound S3 Express credentials provider.",
-    "modules": [
-        "service/s3"
-    ]
-}

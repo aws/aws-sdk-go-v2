@@ -1,3 +1,8 @@
+# v1.82.1 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.82.0 (2026-11-06)
 
 * **Feature**: AWS Systems Manager now provides two new APIs - RegisterDefaultHostManagementConfiguration and DeregisterDefaultHostManagementConfiguration - along with a new DefaultHostManagementConfiguration CloudFormation resource type.

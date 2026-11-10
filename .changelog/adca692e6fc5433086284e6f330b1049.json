@@ -1,8 +1,0 @@
-{
-    "id": "adca692e-6fc5-4330-8628-4e6f330b1049",
-    "type": "feature",
-    "description": "Added support for configuring AMIs, Amazon EC2 security groups, SSH key pairs, and launch template modes when creating or updating AWS PCS compute node groups.",
-    "modules": [
-        "service/pcs"
-    ]
-}

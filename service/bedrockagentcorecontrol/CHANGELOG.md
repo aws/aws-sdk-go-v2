@@ -1,3 +1,9 @@
+# v1.79.0 (2026-11-10)
+
+* **Feature**: Amazon Bedrock AgentCore Gateway now supports domainOverride so JWT-authorized gateways can advertise your public domain in OAuth discovery behind a proxy or custom domain. AgentCore Runtime adds warmup lifecycle hooks and specifying runtime memory via hooksConfiguration and resourceConfigurations.
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.78.1 (2026-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

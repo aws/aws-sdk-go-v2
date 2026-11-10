@@ -3,4 +3,4 @@
 package autoscalingplans
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.39.11"
+const goModuleVersion = "1.39.12"

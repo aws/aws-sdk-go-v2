@@ -1,3 +1,9 @@
+# v1.53.0 (2026-11-10)
+
+* **Feature**: Adds the NONE insights type to disable insights generation for a run, a testPackageArn field in run details, and a new artifact type for device connect command logs.
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.8 (2026-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

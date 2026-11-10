@@ -1,3 +1,87 @@
+# Release (2026-11-10)
+
+## General Highlights
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.48.0
+  * **Feature**: Make Retry Behavior 2.1 the default for standard and adaptive retry modes and remove the AWS_NEW_RETRIES_2026 flag. A retry costs 14 tokens, or 5 for a throttling error. Backoff uses a 50ms base, or 1s for throttling errors, and honors the x-amz-retry-after header. DynamoDB and DynamoDB Streams default to 4 attempts and a 25ms base. Long-polling operations (SQS ReceiveMessage, SFN GetActivityTask, SWF PollForActivityTask and PollForDecisionTask) back off when the retry quota is exhausted. HTTP 429 responses that don't deserialize to a modeled error type, including those from IMDS, are retried as throttling errors, as are HTTP 429 responses from the endpoint credentials provider. StandardOptions.RetryTimeoutCost and StandardOptions.Timeouts are deprecated and no longer used.
+* `github.com/aws/aws-sdk-go-v2/credentials`: [v1.21.0](credentials/CHANGELOG.md#v1210-2026-11-10)
+  * **Feature**: Make Retry Behavior 2.1 the default for standard and adaptive retry modes and remove the AWS_NEW_RETRIES_2026 flag. A retry costs 14 tokens, or 5 for a throttling error. Backoff uses a 50ms base, or 1s for throttling errors, and honors the x-amz-retry-after header. DynamoDB and DynamoDB Streams default to 4 attempts and a 25ms base. Long-polling operations (SQS ReceiveMessage, SFN GetActivityTask, SWF PollForActivityTask and PollForDecisionTask) back off when the retry quota is exhausted. HTTP 429 responses that don't deserialize to a modeled error type, including those from IMDS, are retried as throttling errors, as are HTTP 429 responses from the endpoint credentials provider. StandardOptions.RetryTimeoutCost and StandardOptions.Timeouts are deprecated and no longer used.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.21.21](feature/dynamodb/attributevalue/CHANGELOG.md#v12121-2026-11-10)
+  * **Bug Fix**: Fix a panic in `Marshal` and `MarshalMap` when a typed nil pointer with a pointer-receiver `Marshaler` is held in an interface or is the inner pointer of a double pointer. These values are encoded as `AttributeValueMemberNULL` again.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.20.21](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v12021-2026-11-10)
+  * **Bug Fix**: Fix a panic in `Marshal` and `MarshalMap` when a typed nil pointer with a pointer-receiver `Marshaler` is held in an interface or is the inner pointer of a double pointer. These values are encoded as `AttributeValueMemberNULL` again.
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.23.0](service/arcregionswitch/CHANGELOG.md#v1230-2026-11-10)
+  * **Feature**: Adds RetryableConflictException to UpdatePlan so AWS SDKs automatically retry updates that conflict with a concurrent change.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.81.0](service/autoscaling/CHANGELOG.md#v1810-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.79.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1790-2026-11-10)
+  * **Feature**: Amazon Bedrock AgentCore Gateway now supports domainOverride so JWT-authorized gateways can advertise your public domain in OAuth discovery behind a proxy or custom domain. AgentCore Runtime adds warmup lifecycle hooks and specifying runtime memory via hooksConfiguration and resourceConfigurations.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.83.0](service/cloudformation/CHANGELOG.md#v1830-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearch`: [v1.41.0](service/cloudsearch/CHANGELOG.md#v1410-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchomni`: [v1.3.0](service/cloudwatchomni/CHANGELOG.md#v130-2026-11-10)
+  * **Feature**: Release of GetSpaceDataAccess API - Used to get temporary credentials, limited to the requested actions, for working with data in a space.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.214.0](service/connect/CHANGELOG.md#v12140-2026-11-10)
+  * **Feature**: Amazon Connect now returns Contact Lens conversational analytics configuration in the DescribeContact API. Customers can retrieve a contact's analytics, redaction, summarization, and sentiment settings, consistent with the configuration already available in contact trace records and contact events.
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.53.0](service/devicefarm/CHANGELOG.md#v1530-2026-11-10)
+  * **Feature**: Adds the NONE insights type to disable insights generation for a run, a testPackageArn field in run details, and a new artifact type for device connect command logs.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.59.0](service/docdb/CHANGELOG.md#v1590-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.74.0](service/dynamodb/CHANGELOG.md#v1740-2026-11-10)
+  * **Feature**: Make Retry Behavior 2.1 the default for standard and adaptive retry modes and remove the AWS_NEW_RETRIES_2026 flag. A retry costs 14 tokens, or 5 for a throttling error. Backoff uses a 50ms base, or 1s for throttling errors, and honors the x-amz-retry-after header. DynamoDB and DynamoDB Streams default to 4 attempts and a 25ms base. Long-polling operations (SQS ReceiveMessage, SFN GetActivityTask, SWF PollForActivityTask and PollForDecisionTask) back off when the retry quota is exhausted. HTTP 429 responses that don't deserialize to a modeled error type, including those from IMDS, are retried as throttling errors, as are HTTP 429 responses from the endpoint credentials provider. StandardOptions.RetryTimeoutCost and StandardOptions.Timeouts are deprecated and no longer used.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.47.0](service/dynamodbstreams/CHANGELOG.md#v1470-2026-11-10)
+  * **Feature**: Make Retry Behavior 2.1 the default for standard and adaptive retry modes and remove the AWS_NEW_RETRIES_2026 flag. A retry costs 14 tokens, or 5 for a throttling error. Backoff uses a 50ms base, or 1s for throttling errors, and honors the x-amz-retry-after header. DynamoDB and DynamoDB Streams default to 4 attempts and a 25ms base. Long-polling operations (SQS ReceiveMessage, SFN GetActivityTask, SWF PollForActivityTask and PollForDecisionTask) back off when the retry quota is exhausted. HTTP 429 responses that don't deserialize to a modeled error type, including those from IMDS, are retried as throttling errors, as are HTTP 429 responses from the endpoint credentials provider. StandardOptions.RetryTimeoutCost and StandardOptions.Timeouts are deprecated and no longer used.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.65.0](service/elasticache/CHANGELOG.md#v1650-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.45.0](service/elasticbeanstalk/CHANGELOG.md#v1450-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing`: [v1.42.0](service/elasticloadbalancing/CHANGELOG.md#v1420-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.64.0](service/elasticloadbalancingv2/CHANGELOG.md#v1640-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.69.0](service/gamelift/CHANGELOG.md#v1690-2026-11-10)
+  * **Feature**: Amazon GameLift Servers adds game session placement insights. Logs show how the queue's priority configuration, along with player latency and cost data, are applied to each placement request. Use game session placement insights to diagnose why game session placements succeed, fail, or time out.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.65.0](service/iam/CHANGELOG.md#v1650-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.58.0](service/lakeformation/CHANGELOG.md#v1580-2026-11-10)
+  * **Feature**: Adds support for governing AWS Glue user-defined functions with Lake Formation permissions. This release adds the UserDefinedFunction and AnyResource resources, the EXECUTE permission, and the GetTemporaryGlueFunctionCredentials and GetGlueFunctionSessionContext APIs.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.31.0](service/marketplaceagreement/CHANGELOG.md#v1310-2026-11-10)
+  * **Feature**: This release adds the freeTrialSummary.trialEndTime field to DescribeAgreement and the freeTrialEndTime field to SearchAgreements results, so you can see when an agreement's free trial ends.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.54.0](service/neptune/CHANGELOG.md#v1540-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.78.0](service/networkfirewall/CHANGELOG.md#v1780-2026-11-10)
+  * **Feature**: Firewall Policy V2 for Network Firewall
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.33.0](service/pcs/CHANGELOG.md#v1330-2026-11-10)
+  * **Feature**: Added support for configuring AMIs, Amazon EC2 security groups, SSH key pairs, and launch template modes when creating or updating AWS PCS compute node groups.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.133.0](service/rds/CHANGELOG.md#v11330-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.72.0](service/redshift/CHANGELOG.md#v1720-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/route53profiles`: [v1.19.0](service/route53profiles/CHANGELOG.md#v1190-2026-11-10)
+  * **Feature**: Adds support for having multiple profiles on one VPC. This is done using a priority system to handle conflicts on the dataplane.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.114.10](service/s3/CHANGELOG.md#v111410-2026-11-10)
+  * **Bug Fix**: Sign the S3 Express CreateSession call with the same credentials used to build the session cache key, and give each derived client its own bound S3 Express credentials provider.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.26.0](service/s3tables/CHANGELOG.md#v1260-2026-11-10)
+  * **Feature**: Adds support for server access logging for Amazon S3 table buckets with the new PutTableBucketLogging and GetTableBucketLogging APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.43.0](service/ses/CHANGELOG.md#v1430-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.53.0](service/sfn/CHANGELOG.md#v1530-2026-11-10)
+  * **Feature**: Make Retry Behavior 2.1 the default for standard and adaptive retry modes and remove the AWS_NEW_RETRIES_2026 flag. A retry costs 14 tokens, or 5 for a throttling error. Backoff uses a 50ms base, or 1s for throttling errors, and honors the x-amz-retry-after header. DynamoDB and DynamoDB Streams default to 4 attempts and a 25ms base. Long-polling operations (SQS ReceiveMessage, SFN GetActivityTask, SWF PollForActivityTask and PollForDecisionTask) back off when the retry quota is exhausted. HTTP 429 responses that don't deserialize to a modeled error type, including those from IMDS, are retried as throttling errors, as are HTTP 429 responses from the endpoint credentials provider. StandardOptions.RetryTimeoutCost and StandardOptions.Timeouts are deprecated and no longer used.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.48.0](service/sns/CHANGELOG.md#v1480-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.53.0](service/sqs/CHANGELOG.md#v1530-2026-11-10)
+  * **Feature**: Make Retry Behavior 2.1 the default for standard and adaptive retry modes and remove the AWS_NEW_RETRIES_2026 flag. A retry costs 14 tokens, or 5 for a throttling error. Backoff uses a 50ms base, or 1s for throttling errors, and honors the x-amz-retry-after header. DynamoDB and DynamoDB Streams default to 4 attempts and a 25ms base. Long-polling operations (SQS ReceiveMessage, SFN GetActivityTask, SWF PollForActivityTask and PollForDecisionTask) back off when the retry quota is exhausted. HTTP 429 responses that don't deserialize to a modeled error type, including those from IMDS, are retried as throttling errors, as are HTTP 429 responses from the endpoint credentials provider. StandardOptions.RetryTimeoutCost and StandardOptions.Timeouts are deprecated and no longer used.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.52.0](service/sts/CHANGELOG.md#v1520-2026-11-10)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/swf`: [v1.44.0](service/swf/CHANGELOG.md#v1440-2026-11-10)
+  * **Feature**: Make Retry Behavior 2.1 the default for standard and adaptive retry modes and remove the AWS_NEW_RETRIES_2026 flag. A retry costs 14 tokens, or 5 for a throttling error. Backoff uses a 50ms base, or 1s for throttling errors, and honors the x-amz-retry-after header. DynamoDB and DynamoDB Streams default to 4 attempts and a 25ms base. Long-polling operations (SQS ReceiveMessage, SFN GetActivityTask, SWF PollForActivityTask and PollForDecisionTask) back off when the retry quota is exhausted. HTTP 429 responses that don't deserialize to a modeled error type, including those from IMDS, are retried as throttling errors, as are HTTP 429 responses from the endpoint credentials provider. StandardOptions.RetryTimeoutCost and StandardOptions.Timeouts are deprecated and no longer used.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.44.0](service/verifiedpermissions/CHANGELOG.md#v1440-2026-11-10)
+  * **Feature**: Inconsequential changes to model formatting
+
 # Release (2026-11-09)
 
 ## General Highlights

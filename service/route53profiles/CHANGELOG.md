@@ -1,3 +1,9 @@
+# v1.19.0 (2026-11-10)
+
+* **Feature**: Adds support for having multiple profiles on one VPC. This is done using a priority system to handle conflicts on the dataplane.
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.4 (2026-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

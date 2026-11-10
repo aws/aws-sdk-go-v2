@@ -1,3 +1,9 @@
+# v1.214.0 (2026-11-10)
+
+* **Feature**: Amazon Connect now returns Contact Lens conversational analytics configuration in the DescribeContact API. Customers can retrieve a contact's analytics, redaction, summarization, and sentiment settings, consistent with the configuration already available in contact trace records and contact events.
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.213.0 (2026-11-06)
 
 * **Feature**: Rules in Amazon Connect now support ending email contacts associated to a case based on case events.

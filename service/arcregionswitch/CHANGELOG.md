@@ -1,3 +1,9 @@
+# v1.23.0 (2026-11-10)
+
+* **Feature**: Adds RetryableConflictException to UpdatePlan so AWS SDKs automatically retry updates that conflict with a concurrent change.
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.7 (2026-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

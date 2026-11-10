@@ -3,4 +3,4 @@
 package apprunner
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.48.11"
+const goModuleVersion = "1.48.12"

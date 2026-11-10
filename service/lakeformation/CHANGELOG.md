@@ -1,3 +1,9 @@
+# v1.58.0 (2026-11-10)
+
+* **Feature**: Adds support for governing AWS Glue user-defined functions with Lake Formation permissions. This release adds the UserDefinedFunction and AnyResource resources, the EXECUTE permission, and the GetTemporaryGlueFunctionCredentials and GetGlueFunctionSessionContext APIs.
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.4 (2026-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

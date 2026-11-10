@@ -1,3 +1,9 @@
+# v1.3.0 (2026-11-10)
+
+* **Feature**: Release of GetSpaceDataAccess API - Used to get temporary credentials, limited to the requested actions, for working with data in a space.
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.6 (2026-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

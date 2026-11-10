@@ -1,3 +1,9 @@
+# v1.44.0 (2026-11-10)
+
+* **Feature**: Inconsequential changes to model formatting
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.5 (2026-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "1e450bf3-78eb-4ad5-9d5f-daf5c87a3f3a",
-    "type": "feature",
-    "description": "Amazon Connect now returns Contact Lens conversational analytics configuration in the DescribeContact API. Customers can retrieve a contact's analytics, redaction, summarization, and sentiment settings, consistent with the configuration already available in contact trace records and contact events.",
-    "modules": [
-        "service/connect"
-    ]
-}

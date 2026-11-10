@@ -1,3 +1,9 @@
+# v1.31.0 (2026-11-10)
+
+* **Feature**: This release adds the freeTrialSummary.trialEndTime field to DescribeAgreement and the freeTrialEndTime field to SearchAgreements results, so you can see when an agreement's free trial ends.
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.8 (2026-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

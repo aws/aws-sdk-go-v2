@@ -1,3 +1,8 @@
+# v1.84.1 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.84.0 (2026-11-09)
 
 * **Feature**: Adds support for Workday Data Connect and Workday Live Data Query connection types in Amazon DataZone connection APIs.

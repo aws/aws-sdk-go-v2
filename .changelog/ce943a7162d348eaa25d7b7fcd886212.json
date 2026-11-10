@@ -1,8 +1,0 @@
-{
-    "id": "ce943a71-62d3-48ea-a25d-7b7fcd886212",
-    "type": "feature",
-    "description": "Amazon GameLift Servers adds game session placement insights. Logs show how the queue's priority configuration, along with player latency and cost data, are applied to each placement request. Use game session placement insights to diagnose why game session placements succeed, fail, or time out.",
-    "modules": [
-        "service/gamelift"
-    ]
-}
